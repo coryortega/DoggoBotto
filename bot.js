@@ -65,7 +65,6 @@ if (millisTill10 < 0) {
 }
 setTimeout(function(){uploadDoggo()}, millisTill10);
 
-setTimeout(function(){uploadDoggo()}, 10000);
 
 
 
