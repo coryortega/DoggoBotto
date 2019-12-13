@@ -1,10 +1,25 @@
-const config=require('./config')
 const fs = require('fs')
 const twit=require('twit')
-const T=new twit(config)
 var path = require('path')
 const axios = require('axios')
 const https = require('https')
+var express = require('express');
+
+var app = express();
+app.set('port', process.env.PORT || 5000);
+
+// const config=require('./config')
+
+if(process.env.TWITTER_CONSUMER_KEY == undefined){
+  require('./env.js');
+}
+
+const T=new twit({
+  consumer_key:         process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret:      process.env.TWITTER_CONSUMER_SECRET,
+  access_token:         process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET
+})
 
 var now = new Date();
 
@@ -63,6 +78,10 @@ function uploadDoggo(){
 if (millisTill10 < 0) {
      millisTill10 += 86400000;
 }
+
+console.log ("hereeee", millisTill10)
+
+// setTimeout(function(){uploadDoggo()}, 5000)
 setTimeout(function(){uploadDoggo()}, millisTill10);
 
 

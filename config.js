@@ -8,4 +8,4 @@ module.exports = {
     
     access_token_secret:`ZzJQf0AlenbxXu7ZnzuZv9oS23TppkvsBdN0YpvndrhiV`
     
-    }
+}
