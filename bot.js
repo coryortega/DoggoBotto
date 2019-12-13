@@ -79,9 +79,8 @@ if (millisTill10 < 0) {
      millisTill10 += 86400000;
 }
 
-console.log ("hereeee", millisTill10)
-
-setTimeout(function(){uploadDoggo()}, millisTill10);
+setTimeout(function(){uploadDoggo()}, 5000);
+// setTimeout(function(){uploadDoggo()}, millisTill10);
 
 
 
