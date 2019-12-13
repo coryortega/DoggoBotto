@@ -81,6 +81,7 @@ if (millisTill10 < 0) {
 
 console.log ("hereeee", millisTill10)
 
+setTimeout(function(){uploadDoggo()}, 10000)
 setTimeout(function(){uploadDoggo()}, millisTill10);
 
 
