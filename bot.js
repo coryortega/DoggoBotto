@@ -11,7 +11,7 @@ app.set('port', process.env.PORT || 5000);
 // const config=require('./config')
 
 if(process.env.TWITTER_CONSUMER_KEY == undefined){
-  require('./env.js');
+  require('./.env');
 }
 
 const T=new twit({
@@ -22,6 +22,8 @@ const T=new twit({
 })
 
 var now = new Date();
+
+
 
 var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0) - now;
 
@@ -79,7 +81,8 @@ if (millisTill10 < 0) {
      millisTill10 += 86400000;
 }
 
-setTimeout(function(){uploadDoggo()}, 5000);
+setInterval(function(){uploadDoggo()}, 5000)
+// setTimeout(function(){uploadDoggo()}, 5000);
 // setTimeout(function(){uploadDoggo()}, millisTill10);
 
 
