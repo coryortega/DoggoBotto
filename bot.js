@@ -8,7 +8,6 @@ var express = require('express');
 var app = express();
 app.set('port', process.env.PORT || 5000);
 
-// const config=require('./config')
 
 if(process.env.TWITTER_CONSUMER_KEY == undefined){
   require('./.env');
