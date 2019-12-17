@@ -80,10 +80,13 @@ if (millisTill10 < 0) {
      millisTill10 += 86400000;
 }
 
+
 setInterval(function(){uploadDoggo()}, 5000)
 // setTimeout(function(){uploadDoggo()}, 5000);
 // setTimeout(function(){uploadDoggo()}, millisTill10);
 
-
+app.listen(app.get('port'), function() {
+  console.log('Bot is running on port', app.get('port'));
+});
 
 
