@@ -10,8 +10,9 @@ app.set('port', process.env.PORT || 5000);
 
 
 if(process.env.TWITTER_CONSUMER_KEY == undefined){
-  require('./.env');
+  require('./env');
 }
+
 
 const T=new twit({
   consumer_key:         process.env.TWITTER_CONSUMER_KEY,
