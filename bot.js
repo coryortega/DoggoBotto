@@ -81,8 +81,8 @@ if (millisTill10 < 0) {
 }
 
 
-setInterval(function(){uploadDoggo()}, 5000)
-// setTimeout(function(){uploadDoggo()}, 5000);
+// setInterval(function(){uploadDoggo()}, 5000)
+setTimeout(function(){uploadDoggo()}, 5000);
 // setTimeout(function(){uploadDoggo()}, millisTill10);
 
 app.listen(app.get('port'), function() {
