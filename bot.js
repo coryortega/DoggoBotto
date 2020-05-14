@@ -13,9 +13,9 @@ var app = express();
 app.set('port', 5000);
 
 
-if(process.env.TWITTER_CONSUMER_KEY == undefined){
-  require('./.env');
-}
+// if(process.env.TWITTER_CONSUMER_KEY == undefined){
+//   require('./.env');
+// }
 
 var config = {
   consumer_key:         process.env.TWITTER_CONSUMER_KEY,
