@@ -8,6 +8,7 @@ var express = require('express');
 var request  = require('request').defaults({ encoding: null });
 var http = require('http');
 var {Base64Encode} = require('base64-stream');
+const T=new twit(config)
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -25,7 +26,7 @@ app.set('port', process.env.PORT || 5000);
 //   access_token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET
 // }
 
-const T=new twit(config)
+
 
 var now = new Date();
 
