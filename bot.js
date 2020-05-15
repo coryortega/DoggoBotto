@@ -108,7 +108,7 @@ function uploadDoggo(){
 
 // var j = schedule.scheduleJob('12 * * * *', uploadDoggo());
 
-var j = schedule.scheduleJob('15 * * * *', function(){
+var j = schedule.scheduleJob('0 12 * * *', function(){
   uploadDoggo();
 });
 
