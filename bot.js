@@ -12,6 +12,10 @@ const T=new twit(config);
 var app = express();
 app.set('port', process.env.PORT || 5000);
 
+app.get('/', function (req, res) {
+  res.send("The name's Botto...Doggo Botto")
+})
+
 // i is used to keep track of the Doggo pics stored on the server. Starts at 2 because the program starts with 2 Doggo pics preloaded
 i = 2
 

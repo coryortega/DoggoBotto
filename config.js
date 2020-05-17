@@ -1,6 +1,6 @@
-// if(process.env.TWITTER_CONSUMER_KEY == undefined){
-//     require('./.env');
-//   }
+if(process.env.CONSUMER_KEY == undefined){
+    require('./.env');
+  }
 
 module.exports = {
     consumer_key:         process.env.CONSUMER_KEY,
