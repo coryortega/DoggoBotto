@@ -110,8 +110,6 @@ function uploadDoggo(){
 // setInterval(function(){uploadDoggo()}, 10000)
 
 
-// var j = schedule.scheduleJob('12 * * * *', uploadDoggo());
-
 var j = schedule.scheduleJob('0 12 * * *', function(){
   uploadDoggo();
 });
