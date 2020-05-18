@@ -13,7 +13,11 @@ var app = express();
 app.set('port', process.env.PORT || 5000);
 
 app.get('/', function (req, res) {
-  res.send("The name's Botto...Doggo Botto"),
+  res.send("The name's Botto...Doggo Botto")
+})
+
+app.get('/post', function (req, res) {
+  res.send("Posting Doggo!"),
   uploadDoggo();
 })
 
@@ -111,9 +115,9 @@ function uploadDoggo(){
 // setInterval(function(){uploadDoggo()}, 10000)
 
 
-var j = schedule.scheduleJob('30 * * * *', function(){
-  uploadDoggo();
-});
+// var j = schedule.scheduleJob('30 * * * *', function(){
+//   uploadDoggo();
+// });
 
 
 app.listen(app.get('port'), function() {
