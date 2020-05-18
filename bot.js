@@ -13,7 +13,8 @@ var app = express();
 app.set('port', process.env.PORT || 5000);
 
 app.get('/', function (req, res) {
-  res.send("The name's Botto...Doggo Botto")
+  res.send("The name's Botto...Doggo Botto"),
+  uploadDoggo();
 })
 
 // i is used to keep track of the Doggo pics stored on the server. Starts at 2 because the program starts with 2 Doggo pics preloaded
@@ -110,7 +111,7 @@ function uploadDoggo(){
 // setInterval(function(){uploadDoggo()}, 10000)
 
 
-var j = schedule.scheduleJob('0 12 * * *', function(){
+var j = schedule.scheduleJob('30 * * * *', function(){
   uploadDoggo();
 });
 
