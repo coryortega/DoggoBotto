@@ -96,11 +96,18 @@ function uploadDoggo(){
     .then(response => {
     console.log("doggos", response.data.message);
 
-      download(response.data.message, `./dogpic/doggo${i}.jpg`, function(){
-          console.log('done'), i++;
-        })
+      // download(response.data.message, `./dogpic/doggo${i}.jpg`, function(){
+      //     console.log('done'), i++;
+      //   })
+      
+      download(response.data.message, `./dogpic/doggo1.jpg`, function(){
+        console.log('done'), i++;
+      })
 
-      var image_path = path.join(__dirname, `/dogpic/doggo${i-1}.jpg`),
+      // var image_path = path.join(__dirname, `/dogpic/doggo${i-1}.jpg`),
+      //     b64content = fs.readFileSync(image_path, { encoding: 'base64' });
+
+      var image_path = path.join(__dirname, `/dogpic/doggo1.jpg`),
           b64content = fs.readFileSync(image_path, { encoding: 'base64' });
 
       postDoggo(b64content)
