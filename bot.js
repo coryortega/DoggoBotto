@@ -5,7 +5,6 @@ const config = require('./config.js');
 const axios = require('axios');
 var express = require('express');
 var request  = require('request').defaults({ encoding: null });
-var schedule = require('node-schedule');
 
 const T=new twit(config);
 
@@ -20,9 +19,6 @@ app.get('/post', function (req, res) {
   res.send("Posting Doggo!"),
   uploadDoggo();
 })
-
-// i is used to keep track of the Doggo pics stored on the server. Starts at 2 because the program starts with 2 Doggo pics preloaded
-i = 2
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
@@ -44,6 +40,22 @@ function getDoggoQuote(){
     console.log("The data was not returned", error);
   });
 }
+
+function getDoggoPic(){
+  return axios
+  .get(`https://dog.ceo/api/breeds/image/random/`)
+  .then(response => {
+    console.log("doggos", response.data.message);
+
+    return response.data.message
+
+  })
+  .catch(error => {
+  console.log("The data was not returned", error);
+  });
+
+}
+
 
 function postDoggo(base64){
 
@@ -91,40 +103,17 @@ function uploadDoggo(){
 
   console.log('Opening an image...');
 
-  axios
-    .get(`https://dog.ceo/api/breeds/image/random/`)
-    .then(response => {
-    console.log("doggos", response.data.message);
+  getDoggoPic().then(data => {
 
-      // download(response.data.message, `./dogpic/doggo${i}.jpg`, function(){
-      //     console.log('done'), i++;
-      //   })
-      
-      download(response.data.message, `./dogpic/doggo1.jpg`, function(){
-        console.log('done'), i++;
-      })
-
-      // var image_path = path.join(__dirname, `/dogpic/doggo${i-1}.jpg`),
-      //     b64content = fs.readFileSync(image_path, { encoding: 'base64' });
-
+    download(data, `./dogpic/doggo1.jpg`, function(){
       var image_path = path.join(__dirname, `/dogpic/doggo1.jpg`),
-          b64content = fs.readFileSync(image_path, { encoding: 'base64' });
+      b64content = fs.readFileSync(image_path, { encoding: 'base64' });
+      postDoggo(b64content);
+    });
 
-      postDoggo(b64content)
-  })
-  .catch(error => {
-    console.log("The data was not returned", error);
-  });
+  });    
 
 }
-
-
-// setInterval(function(){uploadDoggo()}, 10000)
-
-
-// var j = schedule.scheduleJob('30 * * * *', function(){
-//   uploadDoggo();
-// });
 
 
 app.listen(app.get('port'), function() {
