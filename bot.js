@@ -115,7 +115,6 @@ function uploadDoggo(){
 
 }
 
-
 app.listen(app.get('port'), function() {
   console.log('Bot is running on port', app.get('port'));
 });
