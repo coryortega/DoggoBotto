@@ -56,7 +56,6 @@ function getDoggoPic(){
 
 }
 
-
 function postDoggo(base64){
 
   console.log('Uploading an image...');
