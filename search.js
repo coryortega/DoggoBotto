@@ -40,6 +40,7 @@ function botFollow() {
     }
 }
 
+
 setInterval(function(){ console.log("first"), botSearch(); }, 45000);
 setInterval(function(){ console.log("last"), botFollow(); }, 60000);
 
