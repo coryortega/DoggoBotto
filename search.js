@@ -26,7 +26,6 @@ function botSearch() {
     });
 }
 
-
 function botFollow() {
     for(let i = 0; i < 10; i++){
             T.post('friendships/create', {Name: Object.keys(userNames)[i], user_id: userNames[Object.keys(userNames)[i]]}, function(error, response) {
