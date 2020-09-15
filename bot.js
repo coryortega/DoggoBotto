@@ -164,7 +164,7 @@ function postUserDoggo(base64, userDoggo) {
               console.log(err);
             } else {
               axios
-              .put(`https://doggobase.herokuapp.com/api/posts/images/${userDoggo.data.id}`, { posted: true, twitter_id: data.id_str })
+              .put(`https://doggobase.herokuapp.com/api/posts/images/${userDoggo.data.id}`, { posted: true })
               .then((response) => {
                 console.log(response)
               })
