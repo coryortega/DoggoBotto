@@ -115,7 +115,7 @@ function postDoggo(base64) {
           "statuses/update",
           {
             media_ids: new Array(data.media_id_string),
-            status: `${doggoQuote.text} - ${doggoQuote.author}\n\nSubmit your doggo at https://doggobotto.com/!`,
+            status: `"${doggoQuote.text}" - ${doggoQuote.author}\n\nSubmit your doggo at https://doggobotto.com/!`,
           },
           function (err, data, response) {
             if (err) {
