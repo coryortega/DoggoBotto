@@ -34,9 +34,4 @@ Each route is tied to a function that will execute when their endpoint is hit. F
 ## Diagram of how DoggoBotto works!
 A flowchart that gives you a rough **rough** idea:
 
-<<<<<<< HEAD
-![alt text for screen readers](./images/DoggoBotto-diagram.png "Diagram")
-=======
 ![doggobotto diagram](/images/DoggoBotto-diagram.PNG "Diagram")
-
->>>>>>> cbf4d044a24450867d338477b59c36191b6589b9
