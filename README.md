@@ -4,8 +4,8 @@ Hello! For those that don't know, DoggoBotto is a Twitter bot that posts both us
 You can find the twitter page [**HERE**](https://twitter.com/doggos4all) and the official website [**HERE**](https://doggobotto.com/).
 
 DoggoBotto also has a FE and BE repository:
-[**Front-End**](https://github.com/coryortega/DoggoBottoFE)
-[**Back-End**](https://github.com/coryortega/DoggoBottoBE)
+- [**Front-End**](https://github.com/coryortega/DoggoBottoFE)
+- [**Back-End**](https://github.com/coryortega/DoggoBottoBE)
 
 ## Setup
 To get this bot up and running, it's quite simple.
@@ -34,4 +34,9 @@ Each route is tied to a function that will execute when their endpoint is hit. F
 ## Diagram of how DoggoBotto works!
 A flowchart that gives you a rough **rough** idea:
 
+<<<<<<< HEAD
 ![alt text for screen readers](./images/DoggoBotto-diagram.png "Diagram")
+=======
+![doggobotto diagram](/images/DoggoBotto-diagram.PNG "Diagram")
+
+>>>>>>> cbf4d044a24450867d338477b59c36191b6589b9
