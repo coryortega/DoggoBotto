@@ -4,8 +4,8 @@ Hello! For those that don't know, DoggoBotto is a Twitter bot that posts both us
 You can find the twitter page [**HERE**](https://twitter.com/doggos4all) and the official website [**HERE**](https://doggobotto.com/).
 
 DoggoBotto also has a FE and BE repository:
-[**Front-End**](https://github.com/coryortega/DoggoBottoFE)
-[**Back-End**](https://github.com/coryortega/DoggoBottoBE)
+- [**Front-End**](https://github.com/coryortega/DoggoBottoFE)
+- [**Back-End**](https://github.com/coryortega/DoggoBottoBE)
 
 ## Setup
 To get this bot up and running, it's quite simple.
