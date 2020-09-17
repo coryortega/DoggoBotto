@@ -17,7 +17,7 @@ function download (uri, filename, callback) {
 
 function getDoggoOTD() {
   return axios
-    .get("https://doggobase.herokuapp.com/api/posts/images/verified")
+    .get(`${process.env.DOGGO_BOTTO_BE}/api/posts/images/verified`)
     .then((response) => {
       return response;
     })
