@@ -34,14 +34,5 @@ Each route is tied to a function that will execute when their endpoint is hit. F
 ## Diagram of how DoggoBotto works!
 A flowchart that gives you a rough **rough** idea:
 
-![alt text for screen readers](/images/DoggoBotto-diagram.PNG "Diagram")
+![doggobotto diagram](/images/DoggoBotto-diagram.PNG "Diagram")
 
-```mermaid
-graph LR
-A[Doggobotto FE] -- User Submissions --> B((Postgres BE))
-B -- Submitted dog images --> C((AWS S3))
-B -- Verified submissions--> F{DoggoBotto}
-D((TheDogAPI)) --> F
-E((Quote API)) --> F
-F --> G{Twitter API}
-```
