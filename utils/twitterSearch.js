@@ -1,5 +1,5 @@
 const twit = require("twit");
-const config = require("./config.js");
+const config = require("../config.js");
 const T = new twit(config);
 
 let userNames = {};
@@ -14,7 +14,6 @@ module.exports = {
     });
   },
 
-  
   botFollow: function () {
     for (let i = 0; i < 8; i++) {
       T.post(
