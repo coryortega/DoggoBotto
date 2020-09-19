@@ -127,7 +127,7 @@ function postDoggo(base64) {
   function uploadUserDoggo(userDoggo) {
     console.log("Opening...", userDoggo.data);
   
-    download(userDoggo.data.img, `/dogpic/doggo1.jpg`, function () {
+    download(userDoggo.data.img, `./dogpic/doggo1.jpg`, function () {
       var image_path = path.join(__dirname, `../dogpic/doggo1.jpg`),
         b64content = fs.readFileSync(image_path, { encoding: "base64" });
       postUserDoggo(b64content, userDoggo);
