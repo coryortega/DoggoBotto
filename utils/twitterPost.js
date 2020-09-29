@@ -71,6 +71,7 @@ function postDoggo(base64) {
       } else {
         console.log("Image uploaded!");
         console.log("Now tweeting it...");
+        console.log("data id:", response)
   
         T.post(
           "statuses/update",
@@ -84,6 +85,8 @@ function postDoggo(base64) {
                 }\n\nDoggo name: ${userDoggo.data.name}\nSubmitted by: ${
               userDoggo.data.username == "null"
                 ? "anonymous"
+                : userDoggo.data.username[0] == "@"
+                ? userDoggo.data.username
                 : "@" + userDoggo.data.username
             }\n\nSubmit your doggo at https://doggobotto.com/!
                 `,
@@ -99,7 +102,7 @@ function postDoggo(base64) {
                   { posted: true }
                 )
                 .then((response) => {
-                  console.log(response);
+                  console.log(response.data);
                 })
                 .catch((error) => {
                   console.error("Server Error", error);
