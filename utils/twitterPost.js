@@ -53,7 +53,6 @@ function postDoggo(base64) {
               console.log(err);
             } else {
               console.log("Posted an image!");
-              // console.log(Object.keys(response))
               doggoOTD = data.id_str;
               console.log(doggoOTD);
             }
