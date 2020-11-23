@@ -4,6 +4,12 @@ const router = express.Router();
 const { getDoggoOTD } = require('../utils/functions.js');
 const { uploadDoggo, uploadUserDoggo } = require('../utils/twitterPost.js');
 const { botSearch, botFollow } = require('../utils/twitterSearch.js');
+const { botUnfollow } = require('../utils/twitterUnfollow.js');
+
+
+router.get("/", function (req, res) {
+  res.send("Hello, homies!");
+});
 
 router.get("/post", function (req, res) {
   res.send("Posting Doggo!"), uploadDoggo();
@@ -27,6 +33,16 @@ router.get("/search", function (req, res) {
   setTimeout(function () {
     botFollow();
   }, 30000);
+});
+
+router.get("/unfollow", function (req, res) {
+  botUnfollow(function(err, value) {
+    if (err) {
+      res.send(err)
+    } else {
+      res.json(value)
+    }
+  })
 });
 
 
