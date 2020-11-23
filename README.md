@@ -27,6 +27,7 @@ To get this bot up and running, it's quite simple.
 |Post non-user submitted Photos|`/post`            |**GET**           |
 |Post user submitted photos (if they exist)         |`/doggoOTD`            |**GET**            |
 |Search and follow users        |`/search`|**GET**|
+|Unfollows users        |`/unfollow`|**GET**|
 
 ### How are the routes used?
 Each route is tied to a function that will execute when their endpoint is hit. For example, if I wanted DoggoBotto to post a picture of one random dog right now, I would perform a **GET** on the '/post' endpoint. I set each of these endpoints to be hit at specified times using Cron-Job's. For more information on Cron-Job's, visit [here](https://cron-job.org/en/).
