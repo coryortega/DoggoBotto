@@ -41,7 +41,7 @@ router.get("/unfollow", function (req, res) {
       res.send(err)
     } else {
       // res.send(Object.keys(value.users))
-      res.json(value.users[0], null, 4)
+      res.json(value)
     }
   })
 });

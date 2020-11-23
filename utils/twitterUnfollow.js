@@ -5,14 +5,29 @@ const T = new twit(config);
 
 function botUnfollow(callback) {
 
-    let followers = [];
-
-    T.get("followers/list", { screen_name: 'doggos4all' }, function (error, data, response) {
-    //   data.forEach(function (tweet) {
-    //     userNames[tweet.user.name] = tweet.user.id;
-    //     console.log(userNames);
-    //   });
-        callback(null, data)
+    T.get("friends/ids", { screen_name: 'doggos4all'}, function (error, data, response) {
+      let oldestFriends = data.ids.slice(-30)
+        // callback(null, data)
+        T.get("friendships/lookup", { screen_name: 'doggos4all', user_id: oldestFriends}, function (error, data, response) {
+          data.forEach(function (follower) {
+            if(follower.connections.length == 1 && follower.screen_name != "doggos4all") {
+              T.post(
+                "friendships/destroy",
+                {
+                  user_id: follower.id,
+                },
+                function (error, response) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log(response);
+                  }
+                }
+              );
+            }
+          });
+            callback(null, data)
+        });
     });
 }
 
@@ -20,23 +35,4 @@ module.exports = {
   botUnfollow
 }
 
-//   botFollow: function () {
-//     for (let i = 0; i < 8; i++) {
-//       T.post(
-//         "friendships/create",
-//         {
-//           Name: Object.keys(userNames)[i],
-//           user_id: userNames[Object.keys(userNames)[i]],
-//         },
-//         function (error, response) {
-//           if (error) {
-//             console.log(error, userNames[i]);
-//           } else {
-//             console.log(response, i);
-//             userNames = {};
-//           }
-//         }
-//       );
-//     }
-//   },
 
