@@ -36,13 +36,15 @@ router.get("/search", function (req, res) {
 });
 
 router.get("/unfollow", function (req, res) {
-  botUnfollow(function(err, value) {
-    if (err) {
-      res.send(err)
-    } else {
-      res.json(value)
-    }
-  })
+  botUnfollow()
+  res.send("I hope this works")
+  // botUnfollow(function(err, value) {
+  //   if (err) {
+  //     res.send(err)
+  //   } else {
+  //     res.json(value)
+  //   }
+  // })
 });
 
 
