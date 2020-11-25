@@ -1,13 +1,10 @@
+const twit = require("twit");
 var request = require("request").defaults({ encoding: null });
 const axios = require("axios");
 const fs = require("fs");
+const config = require("../config.js");
+const T = new twit(config);
 
-module.exports = {
-    getDoggoQuote,
-    getDoggoOTD,
-    getDoggoPic,
-    download
-};
 
 function download (uri, filename, callback) {
   request.head(uri, function (err, res, body) {
@@ -50,3 +47,65 @@ function getDoggoPic() {
       console.log("The data was not returned", error);
     });
 } 
+
+function getFriendsIds() {
+  return new Promise((resolve, reject) => {
+    T.get(
+      "friends/ids",
+      { screen_name: "doggos4all" },
+      function (error, data, response) {
+        let validIds = data.ids.filter((id) => {
+          return id.toString().length < 15;
+        });
+        if(validIds) {
+          resolve(validIds)
+        } else {
+          reject(Error(error))
+        }
+      }
+    );
+  })
+}
+
+function compareUsers(usersIds) {
+  return new Promise((resolve, reject) => {
+    T.get(
+      "friendships/lookup",
+      { screen_name: "doggos4all", user_id: usersIds },
+      function (error, data, response) {
+        if(data) {
+          resolve(data)
+        } else {
+          reject(Error("Error: ", error))
+        }
+      }
+    );
+  })
+
+}
+
+function unfollowUser(userId) {
+  T.post(
+    "friendships/destroy",
+    {
+      user_id: userId,
+    },
+    function (error, response) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(response);
+      }
+    }
+  );
+}
+
+module.exports = {
+  download,
+  getDoggoQuote,
+  getDoggoOTD,
+  getDoggoPic,
+  getFriendsIds,
+  compareUsers,
+  unfollowUser
+};
