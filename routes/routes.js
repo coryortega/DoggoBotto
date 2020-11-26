@@ -45,5 +45,4 @@ router.get("/unfollow", function (req, res) {
   })
 });
 
-
 module.exports = router;
