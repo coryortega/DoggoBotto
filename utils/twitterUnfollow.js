@@ -29,7 +29,7 @@ function recursiveUnfollow(value, users, index, sliceIndex) {
   }
 }
 
-// initializer
+// initializer for recursion
 function botUnfollow() {
   let startingValue = 10
   getFriendsIds().then(data => {
