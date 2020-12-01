@@ -54,13 +54,17 @@ function getFriendsIds() {
       "friends/ids",
       { screen_name: "doggos4all" },
       function (error, data, response) {
-        let validIds = data.ids.filter((id) => {
-          return id.toString().length < 15;
-        });
-        if(validIds) {
-          resolve(validIds)
+        if(data.errors) {
+          console.log(data.errors)
         } else {
-          reject(Error(error))
+          let validIds = data.ids.filter((id) => {
+            return id.toString().length < 15;
+          });
+          if(validIds) {
+            resolve(validIds)
+          } else {
+            reject(Error(error))
+          }
         }
       }
     );

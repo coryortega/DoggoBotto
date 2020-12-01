@@ -11,18 +11,21 @@ const { getFriendsIds, compareUsers, unfollowUser } = require('./functions.js');
 // index = points to the user we're on
 // sliceIndex = the index indicating the point of users we're going to check
 
-function recursiveUnfollow(value, users, index, sliceIndex) {
+function recursiveUnfollow(value, ids, users, index, sliceIndex) {
+  console.log(users[index])
   if(value > 0 && users[index]) {
     if(users[index].connections.length == 1 && users[index].screen_name != "doggos4all") {
       unfollowUser(users[index].id);
+      console.log("unfollowed user: ", users[index].id);
       return recursiveUnfollow(value - 1, users, index - 1, sliceIndex);
     } else {
       return recursiveUnfollow(value, users, index - 1, sliceIndex);
     }
-  } else if(value == 10) {
-      let oldestUsers = data.slice(sliceIndex, sliceIndex + 99);
+  } else if(value == 10 && !users[index]) {
+      console.log("value was never depleted");
+      let oldestUsers = ids.slice(sliceIndex, sliceIndex + 99);
       compareUsers(oldestUsers).then(comparedUsers => {
-        recursiveUnfollow(10, comparedUsers, sliceIndex + 99)
+        recursiveUnfollow(10, ids, comparedUsers, index, sliceIndex + 99)
       })
   } else {
     return "We have either unfollowed the amount specified, or as many as existed"
@@ -31,13 +34,21 @@ function recursiveUnfollow(value, users, index, sliceIndex) {
 
 // initializer
 function botUnfollow() {
-  let startingValue = 10
+  let startingValue = 10;
   getFriendsIds().then(data => {
-    let oldestUsersFirst = data.reverse()
-    let initialSlice = oldestUsersFirst.slice(0, 99)
+    let oldestUsersFirst = [...data].reverse();
+    let initialSlice = oldestUsersFirst.slice(0, 99);
+    // old --> 1295503440
+    // new --> 2951483345
+    console.log(data[0])
     compareUsers(initialSlice).then(comparedUsers => {
-      recursiveUnfollow(startingValue , comparedUsers, 99, 99)
+      console.log(comparedUsers)
+      // console.log("recursive unfollow initialized");
+      // let index = comparedUsers.length - 1;
+      // recursiveUnfollow(startingValue, data, comparedUsers, index, 99);
     })
+  }).catch(error => {
+    console.log(error)
   })
 }
 
