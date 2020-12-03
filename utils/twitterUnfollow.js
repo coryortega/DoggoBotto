@@ -6,29 +6,28 @@ const { getFriendsIds, compareUsers, unfollowUser } = require('./functions.js');
 
 // ************** note: recursiveUnfollow is entirely unnecessary for this. The iterative approach at the bottom would make more sense.*****************
 
-// value = the number of users were gonna unfollower
-// users = users json
-// index = points to the user we're on
+// value = the number of users were gonna unfollow
+// ids = 5000 ids of users DoggoBotto followers
+// users = 99 user objects that represent the relationship between them and DoggoBotto
 // sliceIndex = the index indicating the point of users we're going to check
 
-function recursiveUnfollow(value, ids, users, index, sliceIndex) {
-  console.log(users[index])
-  if(value > 0 && users[index]) {
-    if(users[index].connections.length == 1 && users[index].screen_name != "doggos4all") {
-      unfollowUser(users[index].id);
-      console.log("unfollowed user: ", users[index].id);
-      return recursiveUnfollow(value - 1, users, index - 1, sliceIndex);
+function recursiveUnfollow(value, ids, users, sliceIndex) {
+  if(users.length > 0 && value > 0) {
+    const currentUser = users.pop();
+    if(currentUser.connections.length == 1 && currentUser.screen_name != "doggos4all") {
+      unfollowUser(currentUser.id);
+      return recursiveUnfollow(value - 1, ids, users, sliceIndex);
     } else {
-      return recursiveUnfollow(value, users, index - 1, sliceIndex);
+      return recursiveUnfollow(value, ids, users, sliceIndex);
     }
-  } else if(value == 10 && !users[index]) {
-      console.log("value was never depleted");
+  } else if(users.length == 0 && value > 0) {
+      console.log("Checking next 99 id's...");
       let oldestUsers = ids.slice(sliceIndex, sliceIndex + 99);
       compareUsers(oldestUsers).then(comparedUsers => {
-        recursiveUnfollow(10, ids, comparedUsers, index, sliceIndex + 99)
+        recursiveUnfollow(value, ids, comparedUsers, sliceIndex + 99)
       })
   } else {
-    return "We have either unfollowed the amount specified, or as many as existed"
+    return console.log("We have either unfollowed the amount specified, or as many as existed");
   }
 }
 
@@ -38,14 +37,9 @@ function botUnfollow() {
   getFriendsIds().then(data => {
     let oldestUsersFirst = [...data].reverse();
     let initialSlice = oldestUsersFirst.slice(0, 99);
-    // old --> 1295503440
-    // new --> 2951483345
-    console.log(data[0])
     compareUsers(initialSlice).then(comparedUsers => {
-      console.log(comparedUsers)
-      // console.log("recursive unfollow initialized");
-      // let index = comparedUsers.length - 1;
-      // recursiveUnfollow(startingValue, data, comparedUsers, index, 99);
+      console.log("Recursive unfollow initialized");
+      recursiveUnfollow(startingValue, oldestUsersFirst, comparedUsers, 99);
     })
   }).catch(error => {
     console.log(error)

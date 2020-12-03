@@ -98,7 +98,7 @@ function unfollowUser(userId) {
       if (error) {
         console.log(error);
       } else {
-        console.log(response);
+        console.log("Unfollowed user with id:", userId);
       }
     }
   );

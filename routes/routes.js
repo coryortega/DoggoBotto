@@ -37,7 +37,7 @@ router.get("/search", function (req, res) {
 
 router.get("/unfollow", function (req, res) {
   botUnfollow()
-  res.send("I hope this works")
+  res.send("Unfollowed 10 users...")
   // botUnfollow(function(err, value) {
   //   if (err) {
   //     res.send(err)
