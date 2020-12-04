@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { getDoggoOTD } = require('../utils/functions.js');
 const { uploadDoggo, uploadUserDoggo } = require('../utils/twitterPost.js');
-const { botSearch, botFollow } = require('../utils/twitterSearch.js');
+const { twitterFollow } = require('../utils/twitterFollow.js');
 const { botUnfollow } = require('../utils/twitterUnfollow.js');
 
 
@@ -29,10 +29,11 @@ router.get("/doggoOTD", function (req, res) {
 
 router.get("/search", function (req, res) {
   res.send("hi");
-  botSearch();
-  setTimeout(function () {
-    botFollow();
-  }, 30000);
+  twitterFollow();
+  // botSearch();
+  // setTimeout(function () {
+  //   botFollow();
+  // }, 30000);
 });
 
 router.get("/unfollow", function (req, res) {

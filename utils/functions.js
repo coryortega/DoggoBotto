@@ -85,7 +85,6 @@ function compareUsers(usersIds) {
       }
     );
   })
-
 }
 
 function unfollowUser(userId) {
@@ -104,6 +103,40 @@ function unfollowUser(userId) {
   );
 }
 
+function followUser() {
+      T.post(
+        "friendships/create",
+        {
+          Name: Object.keys(userNames)[i],
+          user_id: userNames[Object.keys(userNames)[i]],
+        },
+        function (error, response) {
+          if (error) {
+            console.log(error, userNames[i]);
+          } else {
+            console.log(response, i);
+            userNames = {};
+          }
+        }
+      );
+  }
+
+function searchUsers() {
+  return new Promise((resolve, reject) => {
+    let userNames = {};
+    T.get("search/tweets", { q: "#dog" }, function (error, tweets, response) {
+      if(error) {
+        reject(Error(error))
+      } else {
+        tweets.statuses.forEach((tweet) => {
+          userNames[tweet.user.id] = tweet.user.name;
+        });
+        resolve(userNames);
+      }
+    });
+  })
+}
+
 module.exports = {
   download,
   getDoggoQuote,
@@ -111,5 +144,7 @@ module.exports = {
   getDoggoPic,
   getFriendsIds,
   compareUsers,
-  unfollowUser
+  unfollowUser,
+  followUser,
+  searchUsers
 };
