@@ -4,7 +4,7 @@ const router = express.Router();
 const { getDoggoOTD } = require('../utils/functions.js');
 const { uploadDoggo, uploadUserDoggo } = require('../utils/twitterPost.js');
 const { twitterFollow } = require('../utils/twitterFollow.js');
-const { botUnfollow } = require('../utils/twitterUnfollow.js');
+const { twitterUnfollow } = require('../utils/twitterUnfollow.js');
 
 
 router.get("/", function (req, res) {
@@ -28,8 +28,8 @@ router.get("/doggoOTD", function (req, res) {
 });
 
 router.get("/search", function (req, res) {
-  res.send("hi");
   twitterFollow();
+  res.send("Following up to 8 users...");
   // botSearch();
   // setTimeout(function () {
   //   botFollow();
@@ -37,7 +37,7 @@ router.get("/search", function (req, res) {
 });
 
 router.get("/unfollow", function (req, res) {
-  botUnfollow()
+  twitterUnfollow()
   res.send("Unfollowed 10 users...")
   // botUnfollow(function(err, value) {
   //   if (err) {

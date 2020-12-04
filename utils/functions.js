@@ -103,19 +103,17 @@ function unfollowUser(userId) {
   );
 }
 
-function followUser() {
+function followUser(userId) {
       T.post(
         "friendships/create",
         {
-          Name: Object.keys(userNames)[i],
-          user_id: userNames[Object.keys(userNames)[i]],
+          user_id: userId,
         },
         function (error, response) {
           if (error) {
-            console.log(error, userNames[i]);
+            console.log(error.allErrors, userId);
           } else {
-            console.log(response, i);
-            userNames = {};
+            console.log("Followed user:", userId);
           }
         }
       );
@@ -123,13 +121,13 @@ function followUser() {
 
 function searchUsers() {
   return new Promise((resolve, reject) => {
-    let userNames = {};
+    let userNames = [];
     T.get("search/tweets", { q: "#dog" }, function (error, tweets, response) {
       if(error) {
         reject(Error(error))
       } else {
         tweets.statuses.forEach((tweet) => {
-          userNames[tweet.user.id] = tweet.user.name;
+          userNames.push(tweet.user.id);
         });
         resolve(userNames);
       }

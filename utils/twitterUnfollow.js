@@ -32,7 +32,7 @@ function recursiveUnfollow(value, ids, users, sliceIndex) {
 }
 
 // initializer
-function botUnfollow() {
+function twitterUnfollow() {
   let startingValue = 10;
   getFriendsIds().then(data => {
     let oldestUsersFirst = [...data].reverse();
@@ -87,5 +87,5 @@ function botUnfollow() {
 // }
 
 module.exports = {
-  botUnfollow,
+  twitterUnfollow,
 };
