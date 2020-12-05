@@ -21,10 +21,6 @@ function postDoggo(base64) {
   getDoggoQuote().then((data) => {
     doggoQuote = data;
 
-    if (doggoQuote.author == "null") {
-      doggoQuote.author = "Unknown Author";
-    }
-
     T.post("media/upload", { media_data: base64 }, function (
       err,
       data,
@@ -43,7 +39,7 @@ function postDoggo(base64) {
             media_ids: new Array(data.media_id_string),
             status: `"${doggoQuote.text}" - ${
               doggoQuote.author == "null" || doggoQuote.author == null
-                ? "Unknown Author"
+                ? "Unknown author"
                 : doggoQuote.author
             }\n\nSubmit your doggo at https://doggobotto.com/!`,
           },

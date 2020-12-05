@@ -46,6 +46,8 @@ function twitterUnfollow() {
   })
 }
 
+// ***** interative approach *****
+
 // function botUnfollow(callback) {
 //   T.get(
 //     "friends/ids",
