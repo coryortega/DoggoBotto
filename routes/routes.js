@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { getDoggoOTD } = require('../utils/functions.js');
-const { uploadDoggo, uploadUserDoggo } = require('../utils/twitterPost.js');
-const { botSearch, botFollow } = require('../utils/twitterSearch.js');
-const { botUnfollow } = require('../utils/twitterUnfollow.js');
-
+const { getDoggoOTD } = require("../utils/functions.js");
+const { uploadDoggo, uploadUserDoggo } = require("../utils/twitterPost.js");
+const { twitterFollow } = require("../utils/twitterFollow.js");
+const { twitterUnfollow } = require("../utils/twitterUnfollow.js");
 
 router.get("/", function (req, res) {
   res.send("Hello, homies!");
@@ -22,29 +21,19 @@ router.get("/doggoOTD", function (req, res) {
       res.send("Non-user submitted Doggo"), uploadDoggo();
     } else {
       uploadUserDoggo(response);
-      res.send("yes");
+      res.send("User submitted Doggo");
     }
   });
 });
 
-router.get("/search", function (req, res) {
-  res.send("hi");
-  botSearch();
-  setTimeout(function () {
-    botFollow();
-  }, 30000);
+router.get("/follow", function (req, res) {
+  twitterFollow();
+  res.send("Following up to 8 users...");
 });
 
 router.get("/unfollow", function (req, res) {
-  botUnfollow()
-  res.send("Unfollowed 10 users...")
-  // botUnfollow(function(err, value) {
-  //   if (err) {
-  //     res.send(err)
-  //   } else {
-  //     res.json(value)
-  //   }
-  // })
+  twitterUnfollow();
+  res.send("Unfollowed 10 users...");
 });
 
 module.exports = router;

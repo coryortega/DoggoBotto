@@ -26,7 +26,7 @@ To get this bot up and running, it's quite simple.
 |----------------|-------------------------------|-----------------------------|
 |Post non-user submitted Photos|`/post`            |**GET**           |
 |Post user submitted photos (if they exist)         |`/doggoOTD`            |**GET**            |
-|Search and follow users        |`/search`|**GET**|
+|Search and follow users        |`/follow`|**GET**|
 |Unfollows users        |`/unfollow`|**GET**|
 
 ### How are the routes used?
