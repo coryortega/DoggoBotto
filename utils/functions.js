@@ -5,12 +5,11 @@ const fs = require("fs");
 const config = require("../config.js");
 const T = new twit(config);
 
-
-function download (uri, filename, callback) {
+function download(uri, filename, callback) {
   request.head(uri, function (err, res, body) {
     request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
   });
-}; 
+}
 
 function getDoggoOTD() {
   return axios
@@ -40,13 +39,12 @@ function getDoggoPic() {
     .get(`https://dog.ceo/api/breeds/image/random/`)
     .then((response) => {
       console.log("doggos", response.data.message);
-
       return response.data.message;
     })
     .catch((error) => {
       console.log("The data was not returned", error);
     });
-} 
+}
 
 function getFriendsIds() {
   return new Promise((resolve, reject) => {
@@ -54,21 +52,21 @@ function getFriendsIds() {
       "friends/ids",
       { screen_name: "doggos4all" },
       function (error, data, response) {
-        if(data.errors) {
-          console.log(data.errors)
+        if (data.errors) {
+          console.log(data.errors);
         } else {
           let validIds = data.ids.filter((id) => {
             return id.toString().length < 15;
           });
-          if(validIds) {
-            resolve(validIds)
+          if (validIds) {
+            resolve(validIds);
           } else {
-            reject(Error(error))
+            reject(Error(error));
           }
         }
       }
     );
-  })
+  });
 }
 
 function compareUsers(usersIds) {
@@ -77,14 +75,14 @@ function compareUsers(usersIds) {
       "friendships/lookup",
       { screen_name: "doggos4all", user_id: usersIds },
       function (error, data, response) {
-        if(data) {
-          resolve(data)
+        if (data) {
+          resolve(data);
         } else {
-          reject(Error("Error: ", error))
+          reject(Error("Error: ", error));
         }
       }
     );
-  })
+  });
 }
 
 function unfollowUser(userId) {
@@ -104,35 +102,43 @@ function unfollowUser(userId) {
 }
 
 function followUser(userId) {
-      T.post(
-        "friendships/create",
-        {
-          user_id: userId,
-        },
-        function (error, response) {
-          if (error) {
-            console.log(error.allErrors, userId);
-          } else {
-            console.log("Followed user:", userId);
-          }
-        }
-      );
-  }
+  T.post(
+    "friendships/create",
+    {
+      user_id: userId,
+    },
+    function (error, response) {
+      if (error) {
+        console.log(error.allErrors, userId);
+      } else {
+        console.log("Followed user:", userId);
+      }
+    }
+  );
+}
 
 function searchUsers() {
   return new Promise((resolve, reject) => {
-    let userNames = [];
-    T.get("search/tweets", { q: "#dog" }, function (error, tweets, response) {
-      if(error) {
-        reject(Error(error))
-      } else {
-        tweets.statuses.forEach((tweet) => {
-          userNames.push(tweet.user.id);
-        });
-        resolve(userNames);
+    let setSize = 15;
+    let ids = new Set();
+    T.get(
+      "search/tweets",
+      { q: "#dog", result_type: "recent", count: 100 },
+      function (error, tweets, response) {
+        if (error) {
+          console.log(error);
+          reject(Error(error));
+        } else {
+          tweets.statuses.forEach((tweet) => {
+            if (tweet.user.id_str.length < 15 && ids.size < setSize) {
+              ids.add(tweet.user.id);
+            }
+          });
+          resolve(ids);
+        }
       }
-    });
-  })
+    );
+  });
 }
 
 module.exports = {
@@ -144,5 +150,5 @@ module.exports = {
   compareUsers,
   unfollowUser,
   followUser,
-  searchUsers
+  searchUsers,
 };

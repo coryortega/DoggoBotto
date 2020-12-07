@@ -5,10 +5,10 @@ const T = new twit(config);
 const { searchUsers, followUser } = require('./functions.js');
 
 function twitterFollow() {
-  searchUsers().then((response) => {
-    for(let i = 0; i < 8; i++) {
-      followUser(response[i]);
-    }
+  searchUsers().then((idSet) => {
+    idSet.forEach((id) => {
+      followUser(id);
+    })
   }).catch((error) => {
     console.log(error)
   })
