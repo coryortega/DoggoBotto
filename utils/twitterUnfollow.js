@@ -31,6 +31,7 @@ function recursiveUnfollow(value, ids, users, sliceIndex) {
   }
 }
 
+
 // initializer
 function twitterUnfollow() {
   let startingValue = 10;
