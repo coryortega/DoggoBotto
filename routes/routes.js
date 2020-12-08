@@ -28,7 +28,7 @@ router.get("/doggoOTD", function (req, res) {
 
 router.get("/follow", function (req, res) {
   twitterFollow();
-  res.send("Following up to 8 users...");
+  res.send("Following up to 15 users...");
 });
 
 router.get("/unfollow", function (req, res) {
