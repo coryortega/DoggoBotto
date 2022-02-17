@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { getDoggoOTD } = require("../utils/functions.js");
-const { uploadDoggo, uploadUserDoggo } = require("../utils/twitterPost.js");
+const { getDoggoOTD, sendDm  } = require("../utils/functions.js");
+const { uploadDoggo, uploadUserDoggo} = require("../utils/twitterPost.js");
 const { twitterFollow } = require("../utils/twitterFollow.js");
 const { twitterUnfollow } = require("../utils/twitterUnfollow.js");
 
@@ -15,6 +15,7 @@ router.get("/post", function (req, res) {
 });
 
 router.get("/doggoOTD", function (req, res) {
+  sendDm("737187329522049024");
   getDoggoOTD().then((response) => {
     console.log(response.status);
     if (response.status === 204) {
@@ -25,6 +26,7 @@ router.get("/doggoOTD", function (req, res) {
     }
   });
 });
+
 
 router.get("/follow", function (req, res) {
   twitterFollow();

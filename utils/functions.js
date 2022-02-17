@@ -46,6 +46,33 @@ function getDoggoPic() {
     });
 }
 
+const getKanyeQuote = async () => {
+  const {
+    data: { quote },
+  } = await axios
+    .get("https://api.kanye.rest")
+    .catch((e) => console.log("Err ", e));
+  if (quote) return quote;
+};
+
+const sendDm = (recipient_id) => {
+  getKanyeQuote().then(text => {
+    const params = {
+      event: {
+        type: "message_create",
+        message_create: {
+          target: { recipient_id },
+          message_data: { text },
+        },
+      },
+    };
+
+    T.post("direct_messages/events/new", params)
+      .then(res => console.log("Message sent: ", res))
+      .catch(e => console.log("Err ", e))
+  })
+};
+
 function getFriendsIds() {
   return new Promise((resolve, reject) => {
     T.get(
@@ -151,4 +178,5 @@ module.exports = {
   unfollowUser,
   followUser,
   searchUsers,
+  sendDm
 };
